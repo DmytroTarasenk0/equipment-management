@@ -1,0 +1,223 @@
+:root {
+  --primary-color: #2563eb;
+  --bg-color: #f8fafc;
+  --text-color: #1e293b;
+  --card-bg: #ffffff;
+
+  /* Status Colors */
+  --status-active: #10b981;
+  --status-warning: #f59e0b;
+  --status-maintenance: #ef4444;
+  --status-decomm: #64748b;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* --- Header and Navigation --- */
+.header {
+  background-color: var(--card-bg);
+  padding: 1rem 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo h1 {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+}
+
+.nav-list {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--primary-color);
+}
+
+/* Burger Menu (Hidden on desktop) */
+.burger-menu {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.burger-menu span {
+  width: 25px;
+  height: 3px;
+  background-color: var(--text-color);
+  transition: all 0.3s ease;
+}
+
+/* --- Main Content & Grid --- */
+.main-content {
+  flex: 1;
+  padding: 2rem 5%;
+}
+
+.catalog-section h2 {
+  margin-bottom: 1.5rem;
+}
+
+/* Grid for Cards */
+.equipment-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Cards */
+.card {
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Hover Animation */
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-header h3 {
+  font-size: 1.25rem;
+}
+
+.status-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: white;
+}
+
+.status-active {
+  background-color: var(--status-active);
+}
+.status-warning {
+  background-color: var(--status-warning);
+}
+.status-maintenance {
+  background-color: var(--status-maintenance);
+}
+.status-decommissioned {
+  background-color: var(--status-decomm);
+}
+
+.alert-icon {
+  color: var(--status-warning);
+}
+
+/* Buttons */
+.btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #1d4ed8;
+}
+
+.btn-disabled {
+  background-color: #e2e8f0;
+  color: #94a3b8;
+  cursor: not-allowed;
+}
+
+/* --- Footer --- */
+.footer {
+  background-color: #1e293b;
+  color: white;
+  text-align: center;
+  padding: 1.5rem;
+  margin-top: 2rem;
+}
+
+.footer a {
+  color: #93c5fd;
+  text-decoration: none;
+}
+
+/* --- Media Queries (Phone) --- */
+@media (max-width: 768px) {
+  /* Show burger menu */
+  .burger-menu {
+    display: flex;
+  }
+
+  /* Hide standard nav list */
+  .nav {
+    display: none;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background-color: var(--card-bg);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Toggled state added via JavaScript */
+  .nav.show {
+    display: block;
+  }
+
+  .nav-list {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .nav-list li {
+    text-align: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid #f1f5f9;
+  }
+}
