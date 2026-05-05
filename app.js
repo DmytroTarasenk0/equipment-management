@@ -1,9 +1,12 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
+const morgan = require("morgan");
 const { sequelize } = require("./models");
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
+const uploadRoutes = require("./routes/uploadRoutes");
+const logger = require("./utils/logger");
 
 const app = express();
 
@@ -11,25 +14,60 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Morgan log and send to Winston
+app.use(
+  morgan("combined", {
+    stream: { write: (message) => logger.info(message.trim()) },
+  }),
+);
+
+// middleware for response time
+app.use((req, res, next) => {
+  const start = Date.now();
+  res.on("finish", () => {
+    const duration = Date.now() - start;
+    logger.info(
+      `Performance: ${req.method} ${req.url} completed in ${duration}ms`,
+    );
+  });
+  next();
+});
+
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/upload", uploadRoutes);
+
+// server status
+app.get("/status", (req, res) => {
+  const memoryUsage = process.memoryUsage();
+  const uptime = process.uptime();
+  res.json({
+    uptime,
+    memoryUsage,
+  });
+});
+
+// error handler
+app.use((err, req, res, next) => {
+  logger.error(err.message);
+  res.status(500).json({ error: err.message || "Server error" });
+});
 
 const PORT = process.env.PORT || 3000;
 
-// initialize db and start Server
 async function startServer() {
   try {
     await sequelize.authenticate();
-    console.log("DB connection established");
+    logger.info("DB connection established");
 
     await sequelize.sync();
-    console.log("Tables synchronized");
+    logger.info("Tables synchronized");
 
     app.listen(PORT, () => {
-      console.log(`API Server running on port ${PORT}`);
+      logger.info(`API Server running on port ${PORT}`);
     });
   } catch (error) {
-    console.error("Error starting server:", error);
+    logger.error("Error starting server: " + error);
   }
 }
 

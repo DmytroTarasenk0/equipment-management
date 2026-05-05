@@ -1,0 +1,35 @@
+[2026-05-05 13:57:37] INFO: DB connection established
+[2026-05-05 13:57:37] INFO: Tables synchronized
+[2026-05-05 13:57:37] INFO: API Server running on port 3000
+[2026-05-05 13:58:35] INFO: ::1 - - [05/May/2026:10:58:35 +0000] "GET /status HTTP/1.1" 200 133 "-" "PostmanRuntime/7.51.1"
+[2026-05-05 13:58:35] INFO: Performance: GET /status completed in 6ms
+[2026-05-05 14:01:40] INFO: ::1 - - [05/May/2026:11:01:40 +0000] "GET /status HTTP/1.1" 200 134 "-" "PostmanRuntime/7.51.1"
+[2026-05-05 14:01:40] INFO: Performance: GET /status completed in 2ms
+[2026-05-05 14:03:01] INFO: ::1 - - [05/May/2026:11:03:01 +0000] "GET /api/upload/single HTTP/1.1" 404 156 "-" "PostmanRuntime/7.51.1"
+[2026-05-05 14:03:01] INFO: Performance: GET /api/upload/single completed in 12ms
+[2026-05-05 14:03:35] INFO: ::1 - - [05/May/2026:11:03:35 +0000] "POST /api/upload/single HTTP/1.1" 401 47 "-" "PostmanRuntime/7.51.1"
+[2026-05-05 14:03:35] INFO: Performance: POST /single completed in 1ms
+[2026-05-05 14:05:56] INFO: ::1 - - [05/May/2026:11:05:56 +0000] "POST /api/auth/login HTTP/1.1" 200 389 "-" "PostmanRuntime/7.51.1"
+[2026-05-05 14:05:56] INFO: Performance: POST /login completed in 129ms
+[2026-05-05 14:06:17] ERROR: Field name missing
+[2026-05-05 14:06:17] INFO: ::1 - - [05/May/2026:11:06:17 +0000] "POST /api/upload/single HTTP/1.1" 500 30 "-" "PostmanRuntime/7.51.1"
+[2026-05-05 14:06:17] INFO: Performance: POST /api/upload/single completed in 7ms
+[2026-05-05 14:06:31] ERROR: Only JPG and PNG types are allowed.
+[2026-05-05 14:06:31] INFO: ::1 - - [05/May/2026:11:06:31 +0000] "POST /api/upload/single HTTP/1.1" 500 47 "-" "PostmanRuntime/7.51.1"
+[2026-05-05 14:06:31] INFO: Performance: POST /api/upload/single completed in 3ms
+[2026-05-05 14:07:29] INFO: ::1 - - [05/May/2026:11:07:29 +0000] "POST /api/upload/single HTTP/1.1" 200 231 "-" "PostmanRuntime/7.51.1"
+[2026-05-05 14:07:29] INFO: Performance: POST /single completed in 11ms
+[2026-05-05 14:36:55] INFO: ::1 - - [05/May/2026:11:36:55 +0000] "GET /api/users/ HTTP/1.1" 403 54 "-" "PostmanRuntime/7.51.1"
+[2026-05-05 14:36:55] INFO: Performance: GET / completed in 2ms
+[2026-05-05 14:37:09] INFO: ::1 - - [05/May/2026:11:37:09 +0000] "GET /api/users/ HTTP/1.1" 200 126 "-" "PostmanRuntime/7.51.1"
+[2026-05-05 14:37:09] INFO: Performance: GET / completed in 38ms
+[2026-05-05 14:37:59] ERROR: Unexpected field
+[2026-05-05 14:42:38] INFO: ::1 - - [05/May/2026:11:42:38 +0000] "POST /api/upload/multiple HTTP/1.1" 200 234 "-" "PostmanRuntime/7.51.1"
+[2026-05-05 14:42:38] INFO: Performance: POST /multiple completed in 9ms
+[2026-05-05 14:43:33] INFO: ::1 - - [05/May/2026:11:43:33 +0000] "POST /api/upload/multiple HTTP/1.1" 200 642 "-" "PostmanRuntime/7.51.1"
+[2026-05-05 14:43:33] INFO: Performance: POST /multiple completed in 19ms
+[2026-05-05 14:44:39] INFO: ::1 - - [05/May/2026:11:44:39 +0000] "GET /status HTTP/1.1" 200 136 "-" "PostmanRuntime/7.51.1"
+[2026-05-05 14:44:39] INFO: Performance: GET /status completed in 1ms
+[2026-05-05 15:14:30] INFO: DB connection established
+[2026-05-05 15:14:30] INFO: Tables synchronized
+[2026-05-05 15:14:30] INFO: API Server running on port 3000
