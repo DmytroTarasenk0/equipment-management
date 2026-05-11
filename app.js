@@ -2,6 +2,8 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
+const helmet = require("helmet");
+const rateLimit = require("express-rate-limit");
 const { sequelize } = require("./models");
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
@@ -9,6 +11,16 @@ const uploadRoutes = require("./routes/uploadRoutes");
 const logger = require("./utils/logger");
 
 const app = express();
+
+app.use(helmet());
+
+// 100 requests / 15 min
+const globalLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  message: { message: "Request limit." },
+});
+app.use("/api", globalLimiter);
 
 // global middleware
 app.use(cors());

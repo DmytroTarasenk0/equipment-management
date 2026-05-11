@@ -1,17 +1,29 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
+const { body, validationResult } = require("express-validator");
+const NodeCache = require("node-cache");
 const { User } = require("../models");
 const { verifyToken } = require("../middleware/authMiddleware");
 
 const router = express.Router();
+const cache = new NodeCache({ stdTTL: 60 }); // 60 sec
 
 // get all
 router.get("/", verifyToken, async (req, res) => {
   try {
+    // check cache
+    const cachedUsers = cache.get("all_users");
+    if (cachedUsers) {
+      return res.json({ source: "cache", data: cachedUsers });
+    }
+
     const users = await User.findAll({
       attributes: { exclude: ["password"] }, // no password for output
     });
-    res.json(users);
+
+    cache.set("all_users", users);
+
+    res.json({ source: "database", data: users });
   } catch (error) {
     res.status(500).json({ message: "Error getting users." });
   }
@@ -33,34 +45,56 @@ router.get("/:id", verifyToken, async (req, res) => {
 });
 
 // add a new user
-router.post("/", verifyToken, async (req, res) => {
-  try {
-    const { name, email, password, role } = req.body;
+router.post(
+  "/",
+  verifyToken,
+  [
+    // validation
+    body("name")
+      .isLength({ min: 2 })
+      .withMessage("The username must be at least 2 characters long"),
+    body("email").isEmail().withMessage("Wrong Email format"),
+    body("password")
+      .isLength({ min: 6 })
+      .withMessage("The password must be at least 6 characters long"),
+  ],
+  async (req, res) => {
+    try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+      }
 
-    if (!name || !email || !password) {
-      return res
-        .status(400)
-        .json({ message: "All required fields must be completed" });
+      const { name, email, password, role } = req.body;
+
+      if (!name || !email || !password) {
+        return res
+          .status(400)
+          .json({ message: "All required fields must be completed" });
+      }
+
+      const existingUser = await User.findOne({ where: { email } });
+      if (existingUser)
+        return res.status(400).json({ message: "Email is already in use" });
+
+      const hashedPassword = await bcrypt.hash(password, 10);
+
+      const newUser = await User.create({
+        name,
+        email,
+        password: hashedPassword,
+        role: role || "Medic",
+      });
+
+      // delete cache since data change
+      cache.del("all_users");
+
+      res.status(201).json({ message: "User created", userId: newUser.id });
+    } catch (error) {
+      res.status(500).json({ message: "Error creating user" });
     }
-
-    const existingUser = await User.findOne({ where: { email } });
-    if (existingUser)
-      return res.status(400).json({ message: "Email is already in use" });
-
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    const newUser = await User.create({
-      name,
-      email,
-      password: hashedPassword,
-      role: role || "Medic",
-    });
-
-    res.status(201).json({ message: "User created", userId: newUser.id });
-  } catch (error) {
-    res.status(500).json({ message: "Error creating user" });
-  }
-});
+  },
+);
 
 // update user password
 router.put("/:id/password", verifyToken, async (req, res) => {

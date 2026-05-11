@@ -33,3 +33,31 @@
 [2026-05-05 15:14:30] INFO: DB connection established
 [2026-05-05 15:14:30] INFO: Tables synchronized
 [2026-05-05 15:14:30] INFO: API Server running on port 3000
+[2026-05-07 08:34:10] INFO: DB connection established
+[2026-05-07 08:34:10] INFO: Tables synchronized
+[2026-05-07 08:34:10] INFO: API Server running on port 3000
+[2026-05-07 08:34:56] INFO: ::1 - - [07/May/2026:05:34:56 +0000] "GET /status HTTP/1.1" 200 133 "-" "PostmanRuntime/7.51.1"
+[2026-05-07 08:34:56] INFO: Performance: GET /status completed in 12ms
+[2026-05-11 13:25:09] INFO: DB connection established
+[2026-05-11 13:25:09] INFO: Tables synchronized
+[2026-05-11 13:25:09] INFO: API Server running on port 3000
+[2026-05-11 13:26:17] INFO: ::1 - - [11/May/2026:10:26:17 +0000] "GET /status HTTP/1.1" 200 133 "-" "-"
+[2026-05-11 13:26:17] INFO: Performance: GET /status completed in 5ms
+[2026-05-11 14:02:34] INFO: ::1 - - [11/May/2026:11:02:34 +0000] "POST /api/auth/register HTTP/1.1" 201 53 "-" "PostmanRuntime/7.51.1"
+[2026-05-11 14:02:34] INFO: Performance: POST /register completed in 117ms
+[2026-05-11 14:03:49] INFO: ::1 - - [11/May/2026:11:03:49 +0000] "POST /api/users/ HTTP/1.1" 403 54 "-" "PostmanRuntime/7.51.1"
+[2026-05-11 14:03:49] INFO: Performance: POST / completed in 4ms
+[2026-05-11 14:03:55] INFO: ::1 - - [11/May/2026:11:03:55 +0000] "POST /api/auth/login HTTP/1.1" 200 389 "-" "PostmanRuntime/7.51.1"
+[2026-05-11 14:03:55] INFO: Performance: POST /login completed in 105ms
+[2026-05-11 14:04:09] INFO: ::1 - - [11/May/2026:11:04:09 +0000] "POST /api/users/ HTTP/1.1" 400 343 "-" "PostmanRuntime/7.51.1"
+[2026-05-11 14:04:09] INFO: Performance: POST / completed in 4ms
+[2026-05-11 14:04:21] INFO: ::1 - - [11/May/2026:11:04:21 +0000] "GET /api/users/ HTTP/1.1" 403 54 "-" "PostmanRuntime/7.51.1"
+[2026-05-11 14:04:21] INFO: Performance: GET / completed in 2ms
+[2026-05-11 14:04:24] INFO: ::1 - - [11/May/2026:11:04:24 +0000] "GET /api/users/ HTTP/1.1" 200 215 "-" "PostmanRuntime/7.51.1"
+[2026-05-11 14:04:24] INFO: Performance: GET / completed in 32ms
+[2026-05-11 14:10:09] INFO: ::1 - - [11/May/2026:11:10:09 +0000] "GET /api/users/ HTTP/1.1" 200 215 "-" "PostmanRuntime/7.51.1"
+[2026-05-11 14:10:09] INFO: Performance: GET / completed in 35ms
+[2026-05-11 14:10:25] INFO: ::1 - - [11/May/2026:11:10:25 +0000] "GET /api/users/ HTTP/1.1" 200 212 "-" "PostmanRuntime/7.51.1"
+[2026-05-11 14:10:25] INFO: Performance: GET / completed in 2ms
+[2026-05-11 14:12:33] INFO: ::1 - - [11/May/2026:11:12:33 +0000] "GET /status HTTP/1.1" 200 136 "-" "-"
+[2026-05-11 14:12:33] INFO: Performance: GET /status completed in 1ms
