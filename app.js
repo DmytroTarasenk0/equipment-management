@@ -4,6 +4,9 @@ const cors = require("cors");
 const morgan = require("morgan");
 const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require("./swagger");
+
 const { sequelize } = require("./models");
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
@@ -11,6 +14,8 @@ const uploadRoutes = require("./routes/uploadRoutes");
 const logger = require("./utils/logger");
 
 const app = express();
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use(helmet());
 
@@ -77,6 +82,9 @@ async function startServer() {
 
     app.listen(PORT, () => {
       logger.info(`API Server running on port ${PORT}`);
+      logger.info(
+        `Swagger documentation available at http://localhost:${PORT}/api-docs`,
+      );
     });
   } catch (error) {
     logger.error("Error starting server: " + error);
